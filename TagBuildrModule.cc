@@ -1,5 +1,5 @@
 #include <node.h>
-#include "TagBuildr.cc"
+#include "TagBuildrCC/TagBuildr.cc"
 
 
 namespace NodeDOM {
