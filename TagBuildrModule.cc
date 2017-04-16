@@ -13,10 +13,10 @@ namespace NodeDOM {
 	using v8::Value;
 	using v8::Exception;
 
-	string handleChildren(const FunctionCallbackInfo<Value>& args) {
-		string children;
+	vector<string> handleChildren(const FunctionCallbackInfo<Value>& args) {
+		vector<string> children;
 		if (args[1]->IsString() || args[1]->IsNumber()) {
-			children = std::string(*String::Utf8Value(args[1]->ToString()));
+			children.push_back(std::string(*String::Utf8Value(args[1]->ToString())));
 		}
 
 		if (args[1]->IsArray()) {
@@ -24,7 +24,7 @@ namespace NodeDOM {
 			unsigned int len = tbChildren->Length();
 
 			for (unsigned int i = 0; i < len; i++) {
-				children += std::string(*String::Utf8Value(tbChildren->Get(i)));
+				children.push_back(std::string(*String::Utf8Value(tbChildren->Get(i))));
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace NodeDOM {
 		}
 
 		TagBuildr tb;
-		string children;
+		vector<string> children;
 
 		if (args.Length() > 1) {
 			children = handleChildren(args);
@@ -65,7 +65,4 @@ namespace NodeDOM {
 
 	NODE_MODULE(addon, init)
 
-
-
-
-} 
+}
