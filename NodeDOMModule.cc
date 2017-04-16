@@ -1,5 +1,6 @@
 #include <node.h>
-#include "TagBuildrCC/TagBuildr.cc"
+#include "TagBuildrCC/TagBuildr.h"
+#include "BrowserDoc/BrowserDoc.cc"
 
 
 namespace NodeDOM {
@@ -8,8 +9,11 @@ namespace NodeDOM {
 	using v8::Isolate;
 	using v8::Local;
 	using v8::Object;
+	using v8::ObjectTemplate;
+	using v8::External;
 	using v8::String;
 	using v8::Array;
+	using v8::Function;
 	using v8::Value;
 	using v8::Exception;
 
@@ -31,7 +35,7 @@ namespace NodeDOM {
 		return children;
 	}
 
-	void Method(const FunctionCallbackInfo<Value>& args) {
+	void tagBuildrExport(const FunctionCallbackInfo<Value>& args) {
 		Isolate* isolate = args.GetIsolate();
 
 		if (args.Length() == 0) {
@@ -59,8 +63,26 @@ namespace NodeDOM {
 
 	}
 
+	void World(const v8::FunctionCallbackInfo<Value>& info) {
+		info.GetReturnValue().Set(String::NewFromUtf8(info.GetIsolate(), "World"));
+	}
+
+	void browserDocExport(const FunctionCallbackInfo<Value>& args) {
+		Isolate* isolate = args.GetIsolate();
+
+		Local<ObjectTemplate> obj = ObjectTemplate::New(isolate);
+
+		obj->Set(String::NewFromUtf8(isolate, "hello"), v8::FunctionTemplate::New(isolate, World));
+
+		args.GetReturnValue().Set(obj);
+	}
+
+	
+
+	
 	void init(Local<Object> exports) {
-		NODE_SET_METHOD(exports, "tagbuildr", Method);
+		NODE_SET_METHOD(exports, "tagbuildr", tagBuildrExport);
+		NODE_SET_METHOD(exports, "BrowserDoc", tagBuildrExport);
 	}
 
 	NODE_MODULE(addon, init)

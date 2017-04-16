@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TagBuildr.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TagBuildrModule.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
