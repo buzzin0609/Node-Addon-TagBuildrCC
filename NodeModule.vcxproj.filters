@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TagBuildr.cc">
+    <ClCompile Include="BrowserDoc\BrowserDoc.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TagBuildrModule.cc">
+    <ClCompile Include="NodeDOMModule.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
